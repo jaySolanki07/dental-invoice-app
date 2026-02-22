@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/dental-invoice-app/",
             "outputPath": "dist/dental-invoice-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -81,6 +82,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            
             "polyfills": [
               "zone.js",
               "zone.js/testing"
