@@ -1,0 +1,46 @@
+/* Full screen background */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e3f2fd, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card styling */
+.login-card {
+  width: 380px;
+  padding: 30px 25px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Logo + title */
+.logo-section {
+  text-align: center;
+  margin-bottom: 20px;
+
+  img {
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: 600;
+    color: #1976d2;
+  }
+}
+
+/* Material form spacing */
+mat-form-field {
+  margin-bottom: 14px;
+}
+
+/* Error text */
+.error-text {
+  color: #d32f2f;
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+}

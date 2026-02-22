@@ -1,0 +1,34 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="logo-section">
+      <img src="assets/logo.png" alt="Clinic Logo" />
+      <h2>Dental Clinic Login</h2>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password">
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="w-100 mt-3"
+        type="submit"
+        [disabled]="loginForm.invalid || isSubmitting"
+      >
+        Login
+      </button>
+
+      <p class="error-text" *ngIf="loginError">
+        {{ loginError }}
+      </p>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,20 @@
+.dashboard-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.clinic-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dashboard-content {
+  padding: 24px;
+  min-height: calc(100vh - 64px);
+  background-color: #f5f7fa;
+}

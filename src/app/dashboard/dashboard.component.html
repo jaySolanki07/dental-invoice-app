@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" class="dashboard-toolbar">
+  <span class="clinic-name">
+    🦷 Dental Clinic Invoice
+  </span>
+
+  <span class="spacer"></span>
+
+  <button mat-button (click)="logout()">
+    Logout
+  </button>
+</mat-toolbar>
+
+<div class="dashboard-content">
+  <router-outlet></router-outlet>
+</div>

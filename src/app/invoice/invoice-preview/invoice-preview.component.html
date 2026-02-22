@@ -1,0 +1,73 @@
+<mat-card class="preview-card" *ngIf="invoice">
+
+  <!-- Header -->
+  <div class="preview-header">
+    <div class="clinic-info">
+      <img src="assets/logo.png" alt="Clinic Logo">
+      <div>
+        <h2>Dental Clinic</h2>
+        <small>Invoice</small>
+      </div>
+    </div>
+
+    <div class="invoice-meta">
+      <p><strong>Invoice #:</strong> {{ invoice.invoiceNumber }}</p>
+      <p><strong>Date:</strong> {{ invoice.invoiceDate | date }}</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Patient Info -->
+  <div class="section">
+    <h3>Patient Details</h3>
+    <p><strong>Name:</strong> {{ invoice.patientName }}</p>
+    <p><strong>Phone:</strong> {{ invoice.patientPhone }}</p>
+  </div>
+
+  <!-- Treatments Table -->
+  <div class="section">
+    <h3>Treatments</h3>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Treatment</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of invoice.items">
+          <td>{{ item.treatment }}</td>
+          <td class="text-end">{{ item.quantity | number:'1.2-2' }}</td>
+          <td class="text-end">₹ {{ item.price | number:'1.2-2' }}</td>
+          <td class="text-end">₹ {{ item.quantity * item.price  | number:'1.2-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Totals -->
+  <div class="totals">
+    <span>Subtotal</span>
+    <strong>₹ {{ invoice.subtotal | number:'1.2-2' }}</strong>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <button mat-stroked-button (click)="backToEdit()">
+      Edit
+    </button>
+
+    <button
+  mat-raised-button
+  color="primary"
+  (click)="downloadPdf()"
+>
+  Download PDF
+</button>
+  </div>
+
+</mat-card>

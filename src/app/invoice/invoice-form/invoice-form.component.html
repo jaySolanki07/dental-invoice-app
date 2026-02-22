@@ -1,0 +1,95 @@
+<mat-card class="invoice-card">
+
+  <!-- Header -->
+  <div class="invoice-header">
+    <h2>Create Invoice</h2>
+    <span class="invoice-number">
+      Invoice #: {{ invoiceNumber }}
+    </span>
+  </div>
+
+  <form [formGroup]="invoiceForm">
+
+    <!-- Patient Details -->
+    <div class="section">
+      <h3>Doctor Details</h3>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-md-6">
+          <mat-label>Doctor Name</mat-label>
+          <input matInput formControlName="patientName">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-md-6">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="patientPhone">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Treatments -->
+    <div class="section">
+      <h3>Work</h3>
+
+      <div formArrayName="items">
+        <div
+          class="treatment-row"
+          *ngFor="let item of items.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <mat-form-field appearance="outline">
+            <mat-label>Treatment</mat-label>
+            <input matInput formControlName="treatment">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Qty</mat-label>
+            <input matInput type="number" formControlName="quantity">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input matInput type="number" formControlName="price">
+          </mat-form-field>
+
+          <button
+            mat-icon-button
+            color="warn"
+            type="button"
+            (click)="removeItem(i)"
+            *ngIf="items.length > 1"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="addItem()"
+      >
+        + Add Treatment
+      </button>
+    </div>
+
+    <!-- Total -->
+    <div class="total-section">
+      <span>Subtotal</span>
+      <strong>₹ {{ getSubtotal() }}</strong>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="previewInvoice()"
+      >
+        Preview Invoice
+      </button>
+    </div>
+
+  </form>
+</mat-card>
