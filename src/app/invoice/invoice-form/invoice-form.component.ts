@@ -50,9 +50,9 @@ export class InvoiceFormComponent {
     savedInvoice.items.forEach((item: any) => {
       this.items.push(
         this.fb.group({
-          treatment: item.treatment,
-          quantity: item.quantity,
-          price: item.price
+          treatment: [item.treatment, Validators.required],
+          quantity: [item.quantity, [Validators.required, Validators.min(1)]],
+          price: [item.price, [Validators.required, Validators.min(0)]],
         })
       );
     });
