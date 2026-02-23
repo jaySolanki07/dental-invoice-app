@@ -38,7 +38,7 @@
           [formGroupName]="i"
         >
           <mat-form-field appearance="outline">
-            <mat-label>Treatment</mat-label>
+            <mat-label>Work</mat-label>
             <input matInput formControlName="treatment">
           </mat-form-field>
 
@@ -76,7 +76,7 @@
     <!-- Total -->
     <div class="total-section">
       <span>Subtotal</span>
-      <strong>₹ {{ getSubtotal() }}</strong>
+      <strong>₹ {{ getSubtotal() | number:'1.2-2'}}</strong>
     </div>
 
     <!-- Actions -->
