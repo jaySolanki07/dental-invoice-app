@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  Validators,
-  ReactiveFormsModule
-} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { MATERIAL_IMPORTS } from '../../shared/material.imports';
+import { MATERIAL_IMPORTS, MY_DATE_FORMATS } from '../../shared/material.imports';
 import { CommonModule } from '@angular/common';
 import { InvoiceService } from '../invoice.service';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-invoice-form',
@@ -19,12 +14,17 @@ import { InvoiceService } from '../invoice.service';
     ReactiveFormsModule,
     ...MATERIAL_IMPORTS],
   templateUrl: './invoice-form.component.html',
-  styleUrl: './invoice-form.component.scss'
+  styleUrl: './invoice-form.component.scss',
+    providers: [
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ]
 })
 export class InvoiceFormComponent {
 
   invoiceForm!: FormGroup;
   invoiceNumber!: string;
+  today = new Date();
 
   constructor(
     private fb: FormBuilder,
@@ -40,7 +40,7 @@ export class InvoiceFormComponent {
     this.invoiceNumber = savedInvoice.invoiceNumber;
 
     this.invoiceForm.patchValue({
-      patientName: savedInvoice.patientName,
+      patientName:  savedInvoice.patientName,
       patientPhone: savedInvoice.patientPhone,
       invoiceDate: savedInvoice.invoiceDate
     });
@@ -50,6 +50,7 @@ export class InvoiceFormComponent {
     savedInvoice.items.forEach((item: any) => {
       this.items.push(
         this.fb.group({
+          date: [item.date, new Date()],
           treatment: [item.treatment, Validators.required],
           quantity: [item.quantity, [Validators.required, Validators.min(1)]],
           price: [item.price, [Validators.required, Validators.min(0)]],
@@ -84,6 +85,7 @@ export class InvoiceFormComponent {
   addItem(): void {
     this.items.push(
       this.fb.group({
+        date: [new Date()],
         treatment: ['', Validators.required],
         quantity: [1, [Validators.required, Validators.min(1)]],
         price: [0, [Validators.required, Validators.min(0)]]

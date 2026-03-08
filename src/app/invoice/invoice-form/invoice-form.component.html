@@ -1,15 +1,11 @@
 <mat-card class="invoice-card">
-
   <!-- Header -->
   <div class="invoice-header">
     <h2>Create Invoice</h2>
-    <span class="invoice-number">
-      Invoice #: {{ invoiceNumber }}
-    </span>
+    <span class="invoice-number"> Invoice #: {{ invoiceNumber }} </span>
   </div>
 
   <form [formGroup]="invoiceForm">
-
     <!-- Patient Details -->
     <div class="section">
       <h3>Doctor Details</h3>
@@ -17,12 +13,13 @@
       <div class="row">
         <mat-form-field appearance="outline" class="col-md-6">
           <mat-label>Doctor Name</mat-label>
-          <input matInput formControlName="patientName">
+          <span matPrefix style="margin-left: 20px;">Dr.&nbsp;</span>
+          <input matInput formControlName="patientName" />
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="col-md-6">
           <mat-label>Phone</mat-label>
-          <input matInput formControlName="patientPhone">
+          <input matInput formControlName="patientPhone" />
         </mat-form-field>
       </div>
     </div>
@@ -37,19 +34,33 @@
           *ngFor="let item of items.controls; let i = index"
           [formGroupName]="i"
         >
-          <mat-form-field appearance="outline">
+          <!-- Date -->
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Date</mat-label>
+            <input matInput [matDatepicker]="picker"  [max]="today" formControlName="date" />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <!-- Work -->
+          <mat-form-field appearance="outline" class="work-field">
             <mat-label>Work</mat-label>
-            <input matInput formControlName="treatment">
+            <input matInput formControlName="treatment" />
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- Qty -->
+          <mat-form-field appearance="outline" class="qty-field">
             <mat-label>Qty</mat-label>
-            <input matInput type="number" formControlName="quantity">
+            <input matInput type="number" formControlName="quantity" />
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- Price -->
+          <mat-form-field appearance="outline" class="price-field">
             <mat-label>Price</mat-label>
-            <input matInput type="number" formControlName="price">
+            <input matInput type="number" formControlName="price" />
           </mat-form-field>
 
           <button
@@ -64,11 +75,7 @@
         </div>
       </div>
 
-      <button
-        mat-stroked-button
-        type="button"
-        (click)="addItem()"
-      >
+      <button mat-stroked-button type="button" (click)="addItem()">
         + Add Treatment
       </button>
     </div>
@@ -76,7 +83,7 @@
     <!-- Total -->
     <div class="total-section">
       <span>Subtotal</span>
-      <strong>₹ {{ getSubtotal() | number:'1.2-2'}}</strong>
+      <strong>₹ {{ getSubtotal() | number: "1.2-2" }}</strong>
     </div>
 
     <!-- Actions -->
@@ -90,6 +97,5 @@
         Preview Invoice
       </button>
     </div>
-
   </form>
 </mat-card>

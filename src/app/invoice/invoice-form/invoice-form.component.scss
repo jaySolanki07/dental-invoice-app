@@ -32,11 +32,42 @@
 }
 
 .treatment-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr auto;
-  gap: 12px;
+  display: flex;
+  gap: 10px;
   align-items: center;
-  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+/* Desktop layout */
+.date-field {
+  flex: 0.9;
+}
+
+.work-field {
+  flex: 2.8;
+}
+
+.qty-field {
+  flex: 0.8;
+}
+
+.price-field {
+  flex: 1;
+}
+
+/* Mobile layout */
+@media (max-width: 600px) {
+  .treatment-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .date-field,
+  .work-field,
+  .qty-field,
+  .price-field {
+    width: 100%;
+  }
 }
 
 .total-section {

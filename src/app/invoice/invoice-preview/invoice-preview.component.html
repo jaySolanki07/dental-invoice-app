@@ -21,7 +21,7 @@
   <!-- Patient Info -->
   <div class="section">
     <h3>Patient Details</h3>
-    <p><strong>Name:</strong> {{ invoice.patientName }}</p>
+    <p><strong>Name:</strong>  <span matPrefix> Dr.&nbsp;</span> {{ invoice.patientName }}</p>
     <p><strong>Phone:</strong> {{ invoice.patientPhone }}</p>
   </div>
 
@@ -32,6 +32,7 @@
     <table class="table table-bordered">
       <thead>
         <tr>
+          <th>Date</th>
           <th>Treatment</th>
           <th>Qty</th>
           <th>Price</th>
@@ -40,6 +41,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of invoice.items">
+          <td>{{ item.date  | date:'dd/MM/yyyy' }}</td>
           <td>{{ item.treatment }}</td>
           <td class="text-end">{{ item.quantity | number:'1.2-2' }}</td>
           <td class="text-end">₹ {{ item.price | number:'1.2-2' }}</td>
